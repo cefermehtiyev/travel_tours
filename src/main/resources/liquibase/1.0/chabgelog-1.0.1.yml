@@ -1,0 +1,49 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create Destinations table
+      author: Cefer Mehtiyev
+      changes:
+        - createTable:
+            tableName: destinations
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: location
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: visit_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tour_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: destination foriegn key
+      author: cefermehtiyev
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: destinations
+            baseColumnNames: tour_id
+            constraintName: fk_destinations_tour
+            referencedTableName: tours
+            referencedColumnNames: id
+
+
+

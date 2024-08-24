@@ -1,0 +1,71 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create traveler table
+      author: Cefer Mehtiyev
+      changes:
+        - createTable:
+            tableName: travelers
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(256)
+              - column:
+                  name: last_name
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: traveler and tour
+      author: cefermehtiyev
+      changes:
+        - createTable:
+            tableName: tour_traveler
+            columns:
+              - column:
+                  name: tour_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: traveler_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: tour foriegn key
+      author: cefermehtiyev
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: tour_traveler
+            baseColumnNames: tour_id
+            constraintName: fk_tourtraveler_tour
+            referencedTableName: tours
+            referencedColumnNames: id
+
+  - changeSet:
+      id: 7
+      author: cefermehtiyev
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: tour_traveler
+            baseColumnNames: traveler_id
+            constraintName: fk_tourtraveler_traveler
+            referencedTableName: travelers
+            referencedColumnNames: id
+
+
+          remarks: Table to store information traveler cards

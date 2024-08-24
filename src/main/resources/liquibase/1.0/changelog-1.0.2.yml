@@ -1,0 +1,74 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create guide table
+      author: Cefer Mehtiyev
+      changes:
+        - createTable:
+            tableName: guides
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone_number
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 5
+      author: cefermehtiyev
+      changes:
+        - createTable:
+            tableName: tour_guide
+            columns:
+              - column:
+                  name: tour_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: guide_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 6
+      author: cefermehtiyev
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: tour_guide
+            baseColumnNames: tour_id
+            constraintName: fk_tourguide_tour
+            referencedTableName: tours
+            referencedColumnNames: id
+
+  - changeSet:
+      id: 7
+      author: cefermehtiyev
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: tour_guide
+            baseColumnNames: guide_id
+            constraintName: fk_tourguide_guide
+            referencedTableName: guides
+            referencedColumnNames: id
+
+
+
+          remarks: Table to store information guide cards
