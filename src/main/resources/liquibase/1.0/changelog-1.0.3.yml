@@ -1,0 +1,42 @@
+
+databaseChangeLog:
+  - changeSet:
+      id: Create passport table
+      author: Cefer Mehtiyev
+      changes:
+        - createTable:
+            tableName: passports
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: passport_number
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: issue_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expiry_date
+                  type: date
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: passport foriegn key
+      author: cefermehtiyev
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: passports
+            baseColumnNames: id
+            constraintName: guide_passport
+            referencedTableName: guides
+            referencedColumnNames: id

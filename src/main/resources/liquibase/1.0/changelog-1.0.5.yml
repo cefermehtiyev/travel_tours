@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create GuideSchedule table
+      author: Cefer Mehtiyev
+      changes:
+        - createTable:
+            tableName: guide_schedule
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: guide_status
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: work_day
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+
+  - changeSet:
+      id: guide schedule foreign key
+      author: cefermehtiyev
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: guide_schedule
+            baseColumnNames: id
+            constraintName: schedule_guide
+            referencedTableName: guides
+            referencedColumnNames: id
+
